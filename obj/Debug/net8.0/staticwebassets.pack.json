@@ -1,0 +1,25 @@
+{
+  "Files": [
+    {
+      "Id": "/home/alhoussen/Dev/alh/classroom/contactManagmentC#/wwwroot/js/contacts.js",
+      "PackagePath": "staticwebassets/js/contacts.js"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.ContactManagement.Api.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.build.ContactManagement.Api.props",
+      "PackagePath": "build\\ContactManagement.Api.props"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.buildMultiTargeting.ContactManagement.Api.props",
+      "PackagePath": "buildMultiTargeting\\ContactManagement.Api.props"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.buildTransitive.ContactManagement.Api.props",
+      "PackagePath": "buildTransitive\\ContactManagement.Api.props"
+    }
+  ],
+  "ElementsToRemove": []
+}
