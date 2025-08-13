@@ -1,0 +1,178 @@
+2025-08-13 10:35:03.254 +00:00 [INF] User profile is available. Using '/home/alhoussen/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+2025-08-13 10:35:03.620 +00:00 [INF] Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*) FROM "sqlite_master" WHERE "type" = 'table' AND "rootpage" IS NOT NULL;
+2025-08-13 10:35:03.625 +00:00 [INF] Démarrage de l'application Contact Management API
+2025-08-13 10:35:03.656 +00:00 [INF] Now listening on: http://localhost:5000
+2025-08-13 10:35:03.658 +00:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-08-13 10:35:03.658 +00:00 [INF] Hosting environment: Production
+2025-08-13 10:35:03.658 +00:00 [INF] Content root path: /home/alhoussen/Dev/alh/classroom/contactManagmentC#
+2025-08-13 10:35:13.098 +00:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/contacts/6 - null null
+2025-08-13 10:35:13.102 +00:00 [WRN] Failed to determine the https port for redirect.
+2025-08-13 10:35:13.114 +00:00 [INF] Executing endpoint 'ContactManagement.Api.Controllers.ContactsController.GetContact (ContactManagement.Api)'
+2025-08-13 10:35:13.130 +00:00 [INF] Route matched with {action = "GetContact", controller = "Contacts"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[ContactManagement.Api.Models.DTOs.ContactDto]] GetContact(Int32, System.Threading.CancellationToken) on controller ContactManagement.Api.Controllers.ContactsController (ContactManagement.Api).
+2025-08-13 10:35:13.382 +00:00 [INF] Executed DbCommand (5ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT "c"."Id", "c"."Address", "c"."CreatedAt", "c"."Email", "c"."FirstName", "c"."LastName", "c"."PhoneNumber", "c"."UpdatedAt"
+FROM "Contacts" AS "c"
+WHERE "c"."Id" = @__id_0
+LIMIT 1
+2025-08-13 10:35:13.418 +00:00 [INF] Executing OkObjectResult, writing value of type 'ContactManagement.Api.Models.DTOs.ContactDto'.
+2025-08-13 10:35:13.459 +00:00 [INF] Executed action ContactManagement.Api.Controllers.ContactsController.GetContact (ContactManagement.Api) in 327.1244ms
+2025-08-13 10:35:13.460 +00:00 [INF] Executed endpoint 'ContactManagement.Api.Controllers.ContactsController.GetContact (ContactManagement.Api)'
+2025-08-13 10:35:13.464 +00:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/contacts/6 - 200 null application/json; charset=utf-8 366.8083ms
+2025-08-13 10:35:23.346 +00:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/contacts/6 - null null
+2025-08-13 10:35:23.348 +00:00 [INF] Executing endpoint 'ContactManagement.Api.Controllers.ContactsController.GetContact (ContactManagement.Api)'
+2025-08-13 10:35:23.349 +00:00 [INF] Route matched with {action = "GetContact", controller = "Contacts"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[ContactManagement.Api.Models.DTOs.ContactDto]] GetContact(Int32, System.Threading.CancellationToken) on controller ContactManagement.Api.Controllers.ContactsController (ContactManagement.Api).
+2025-08-13 10:35:23.394 +00:00 [INF] Executed DbCommand (0ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT "c"."Id", "c"."Address", "c"."CreatedAt", "c"."Email", "c"."FirstName", "c"."LastName", "c"."PhoneNumber", "c"."UpdatedAt"
+FROM "Contacts" AS "c"
+WHERE "c"."Id" = @__id_0
+LIMIT 1
+2025-08-13 10:35:23.395 +00:00 [INF] Executing OkObjectResult, writing value of type 'ContactManagement.Api.Models.DTOs.ContactDto'.
+2025-08-13 10:35:23.395 +00:00 [INF] Executed action ContactManagement.Api.Controllers.ContactsController.GetContact (ContactManagement.Api) in 46.31ms
+2025-08-13 10:35:23.395 +00:00 [INF] Executed endpoint 'ContactManagement.Api.Controllers.ContactsController.GetContact (ContactManagement.Api)'
+2025-08-13 10:35:23.396 +00:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/contacts/6 - 200 null application/json; charset=utf-8 49.862ms
+2025-08-13 10:36:03.680 +00:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/api/contacts - application/json 109
+2025-08-13 10:36:03.687 +00:00 [INF] CORS policy execution successful.
+2025-08-13 10:36:03.688 +00:00 [INF] Executing endpoint 'ContactManagement.Api.Controllers.ContactsController.CreateContact (ContactManagement.Api)'
+2025-08-13 10:36:03.694 +00:00 [INF] Route matched with {action = "CreateContact", controller = "Contacts"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[ContactManagement.Api.Models.DTOs.ContactDto]] CreateContact(ContactManagement.Api.Models.DTOs.CreateContactDto, System.Threading.CancellationToken) on controller ContactManagement.Api.Controllers.ContactsController (ContactManagement.Api).
+2025-08-13 10:36:03.741 +00:00 [INF] Executed DbCommand (1ms) [Parameters=[@__ToLower_0='?' (Size = 12)], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Contacts" AS "c"
+    WHERE lower("c"."Email") = @__ToLower_0)
+2025-08-13 10:36:03.792 +00:00 [INF] Executed DbCommand (0ms) [Parameters=[@p0='?' (Size = 8), @p1='?' (DbType = DateTime), @p2='?' (Size = 12), @p3='?' (Size = 3), @p4='?' (Size = 6), @p5='?' (Size = 9), @p6='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "Contacts" ("Address", "CreatedAt", "Email", "FirstName", "LastName", "PhoneNumber", "UpdatedAt")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6)
+RETURNING "Id";
+2025-08-13 10:36:03.806 +00:00 [INF] Created new contact with ID 8 and email al@gmail.com
+2025-08-13 10:36:03.807 +00:00 [INF] Executing CreatedAtActionResult, writing value of type 'ContactManagement.Api.Models.DTOs.ContactDto'.
+2025-08-13 10:36:03.817 +00:00 [INF] Executed action ContactManagement.Api.Controllers.ContactsController.CreateContact (ContactManagement.Api) in 123.7929ms
+2025-08-13 10:36:03.818 +00:00 [INF] Executed endpoint 'ContactManagement.Api.Controllers.ContactsController.CreateContact (ContactManagement.Api)'
+2025-08-13 10:36:03.818 +00:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/api/contacts - 201 null application/json; charset=utf-8 138.1743ms
+2025-08-13 10:36:03.824 +00:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/contacts?pageNumber=1&pageSize=12&sortBy=lastName&sortOrder=asc - null null
+2025-08-13 10:36:03.824 +00:00 [INF] Executing endpoint 'ContactManagement.Api.Controllers.ContactsController.GetContacts (ContactManagement.Api)'
+2025-08-13 10:36:03.828 +00:00 [INF] Route matched with {action = "GetContacts", controller = "Contacts"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[ContactManagement.Api.Models.DTOs.PagedResultDto`1[ContactManagement.Api.Models.DTOs.ContactDto]]] GetContacts(ContactManagement.Api.Models.DTOs.ContactSearchDto, System.Threading.CancellationToken) on controller ContactManagement.Api.Controllers.ContactsController (ContactManagement.Api).
+2025-08-13 10:36:03.846 +00:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM "Contacts" AS "c"
+2025-08-13 10:36:03.854 +00:00 [INF] Executed DbCommand (0ms) [Parameters=[@__p_1='?' (DbType = Int32), @__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT "c"."Id", "c"."Address", "c"."CreatedAt", "c"."Email", "c"."FirstName", "c"."LastName", "c"."PhoneNumber", "c"."UpdatedAt"
+FROM "Contacts" AS "c"
+ORDER BY "c"."LastName"
+LIMIT @__p_1 OFFSET @__p_0
+2025-08-13 10:36:03.860 +00:00 [INF] Retrieved 7 contacts (page 1/1)
+2025-08-13 10:36:03.861 +00:00 [INF] Executing OkObjectResult, writing value of type 'ContactManagement.Api.Models.DTOs.PagedResultDto`1[[ContactManagement.Api.Models.DTOs.ContactDto, ContactManagement.Api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-08-13 10:36:03.869 +00:00 [INF] Executed action ContactManagement.Api.Controllers.ContactsController.GetContacts (ContactManagement.Api) in 40.6193ms
+2025-08-13 10:36:03.869 +00:00 [INF] Executed endpoint 'ContactManagement.Api.Controllers.ContactsController.GetContacts (ContactManagement.Api)'
+2025-08-13 10:36:03.870 +00:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/contacts?pageNumber=1&pageSize=12&sortBy=lastName&sortOrder=asc - 200 null application/json; charset=utf-8 45.7681ms
+2025-08-13 10:36:14.266 +00:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/contacts/8 - null null
+2025-08-13 10:36:14.267 +00:00 [INF] Executing endpoint 'ContactManagement.Api.Controllers.ContactsController.GetContact (ContactManagement.Api)'
+2025-08-13 10:36:14.267 +00:00 [INF] Route matched with {action = "GetContact", controller = "Contacts"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[ContactManagement.Api.Models.DTOs.ContactDto]] GetContact(Int32, System.Threading.CancellationToken) on controller ContactManagement.Api.Controllers.ContactsController (ContactManagement.Api).
+2025-08-13 10:36:14.269 +00:00 [INF] Executed DbCommand (0ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT "c"."Id", "c"."Address", "c"."CreatedAt", "c"."Email", "c"."FirstName", "c"."LastName", "c"."PhoneNumber", "c"."UpdatedAt"
+FROM "Contacts" AS "c"
+WHERE "c"."Id" = @__id_0
+LIMIT 1
+2025-08-13 10:36:14.270 +00:00 [INF] Executing OkObjectResult, writing value of type 'ContactManagement.Api.Models.DTOs.ContactDto'.
+2025-08-13 10:36:14.271 +00:00 [INF] Executed action ContactManagement.Api.Controllers.ContactsController.GetContact (ContactManagement.Api) in 2.9516ms
+2025-08-13 10:36:14.271 +00:00 [INF] Executed endpoint 'ContactManagement.Api.Controllers.ContactsController.GetContact (ContactManagement.Api)'
+2025-08-13 10:36:14.271 +00:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/contacts/8 - 200 null application/json; charset=utf-8 4.5583ms
+2025-08-13 10:36:16.391 +00:00 [INF] Request starting HTTP/1.1 DELETE http://localhost:5000/api/contacts/8 - null null
+2025-08-13 10:36:16.392 +00:00 [INF] CORS policy execution successful.
+2025-08-13 10:36:16.393 +00:00 [INF] Executing endpoint 'ContactManagement.Api.Controllers.ContactsController.DeleteContact (ContactManagement.Api)'
+2025-08-13 10:36:16.400 +00:00 [INF] Route matched with {action = "DeleteContact", controller = "Contacts"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] DeleteContact(Int32, System.Threading.CancellationToken) on controller ContactManagement.Api.Controllers.ContactsController (ContactManagement.Api).
+2025-08-13 10:36:16.403 +00:00 [INF] Executed DbCommand (0ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT "c"."Id", "c"."Address", "c"."CreatedAt", "c"."Email", "c"."FirstName", "c"."LastName", "c"."PhoneNumber", "c"."UpdatedAt"
+FROM "Contacts" AS "c"
+WHERE "c"."Id" = @__id_0
+LIMIT 1
+2025-08-13 10:36:16.410 +00:00 [INF] Executed DbCommand (0ms) [Parameters=[@p0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+DELETE FROM "Contacts"
+WHERE "Id" = @p0
+RETURNING 1;
+2025-08-13 10:36:16.417 +00:00 [INF] Deleted contact with ID 8 and email al@gmail.com
+2025-08-13 10:36:16.418 +00:00 [INF] Executing StatusCodeResult, setting HTTP status code 204
+2025-08-13 10:36:16.418 +00:00 [INF] Executed action ContactManagement.Api.Controllers.ContactsController.DeleteContact (ContactManagement.Api) in 17.7896ms
+2025-08-13 10:36:16.419 +00:00 [INF] Executed endpoint 'ContactManagement.Api.Controllers.ContactsController.DeleteContact (ContactManagement.Api)'
+2025-08-13 10:36:16.419 +00:00 [INF] Request finished HTTP/1.1 DELETE http://localhost:5000/api/contacts/8 - 204 null null 28.0801ms
+2025-08-13 10:36:16.422 +00:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/contacts?pageNumber=1&pageSize=12&sortBy=lastName&sortOrder=asc - null null
+2025-08-13 10:36:16.422 +00:00 [INF] Executing endpoint 'ContactManagement.Api.Controllers.ContactsController.GetContacts (ContactManagement.Api)'
+2025-08-13 10:36:16.422 +00:00 [INF] Route matched with {action = "GetContacts", controller = "Contacts"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[ContactManagement.Api.Models.DTOs.PagedResultDto`1[ContactManagement.Api.Models.DTOs.ContactDto]]] GetContacts(ContactManagement.Api.Models.DTOs.ContactSearchDto, System.Threading.CancellationToken) on controller ContactManagement.Api.Controllers.ContactsController (ContactManagement.Api).
+2025-08-13 10:36:16.424 +00:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM "Contacts" AS "c"
+2025-08-13 10:36:16.424 +00:00 [INF] Executed DbCommand (0ms) [Parameters=[@__p_1='?' (DbType = Int32), @__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT "c"."Id", "c"."Address", "c"."CreatedAt", "c"."Email", "c"."FirstName", "c"."LastName", "c"."PhoneNumber", "c"."UpdatedAt"
+FROM "Contacts" AS "c"
+ORDER BY "c"."LastName"
+LIMIT @__p_1 OFFSET @__p_0
+2025-08-13 10:36:16.425 +00:00 [INF] Retrieved 6 contacts (page 1/1)
+2025-08-13 10:36:16.425 +00:00 [INF] Executing OkObjectResult, writing value of type 'ContactManagement.Api.Models.DTOs.PagedResultDto`1[[ContactManagement.Api.Models.DTOs.ContactDto, ContactManagement.Api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-08-13 10:36:16.425 +00:00 [INF] Executed action ContactManagement.Api.Controllers.ContactsController.GetContacts (ContactManagement.Api) in 2.8705ms
+2025-08-13 10:36:16.425 +00:00 [INF] Executed endpoint 'ContactManagement.Api.Controllers.ContactsController.GetContacts (ContactManagement.Api)'
+2025-08-13 10:36:16.425 +00:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/contacts?pageNumber=1&pageSize=12&sortBy=lastName&sortOrder=asc - 200 null application/json; charset=utf-8 3.5485ms
+2025-08-13 10:36:54.151 +00:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/contacts?pageNumber=1&pageSize=12&sortBy=firstName&sortOrder=asc - null null
+2025-08-13 10:36:54.152 +00:00 [INF] Executing endpoint 'ContactManagement.Api.Controllers.ContactsController.GetContacts (ContactManagement.Api)'
+2025-08-13 10:36:54.153 +00:00 [INF] Route matched with {action = "GetContacts", controller = "Contacts"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[ContactManagement.Api.Models.DTOs.PagedResultDto`1[ContactManagement.Api.Models.DTOs.ContactDto]]] GetContacts(ContactManagement.Api.Models.DTOs.ContactSearchDto, System.Threading.CancellationToken) on controller ContactManagement.Api.Controllers.ContactsController (ContactManagement.Api).
+2025-08-13 10:36:54.159 +00:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM "Contacts" AS "c"
+2025-08-13 10:36:54.165 +00:00 [INF] Executed DbCommand (0ms) [Parameters=[@__p_1='?' (DbType = Int32), @__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT "c"."Id", "c"."Address", "c"."CreatedAt", "c"."Email", "c"."FirstName", "c"."LastName", "c"."PhoneNumber", "c"."UpdatedAt"
+FROM "Contacts" AS "c"
+ORDER BY "c"."FirstName"
+LIMIT @__p_1 OFFSET @__p_0
+2025-08-13 10:36:54.165 +00:00 [INF] Retrieved 6 contacts (page 1/1)
+2025-08-13 10:36:54.165 +00:00 [INF] Executing OkObjectResult, writing value of type 'ContactManagement.Api.Models.DTOs.PagedResultDto`1[[ContactManagement.Api.Models.DTOs.ContactDto, ContactManagement.Api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-08-13 10:36:54.166 +00:00 [INF] Executed action ContactManagement.Api.Controllers.ContactsController.GetContacts (ContactManagement.Api) in 12.9617ms
+2025-08-13 10:36:54.166 +00:00 [INF] Executed endpoint 'ContactManagement.Api.Controllers.ContactsController.GetContacts (ContactManagement.Api)'
+2025-08-13 10:36:54.167 +00:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/contacts?pageNumber=1&pageSize=12&sortBy=firstName&sortOrder=asc - 200 null application/json; charset=utf-8 14.8868ms
+2025-08-13 10:36:57.108 +00:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/contacts?pageNumber=1&pageSize=12&sortBy=firstName&sortOrder=desc - null null
+2025-08-13 10:36:57.108 +00:00 [INF] Executing endpoint 'ContactManagement.Api.Controllers.ContactsController.GetContacts (ContactManagement.Api)'
+2025-08-13 10:36:57.109 +00:00 [INF] Route matched with {action = "GetContacts", controller = "Contacts"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[ContactManagement.Api.Models.DTOs.PagedResultDto`1[ContactManagement.Api.Models.DTOs.ContactDto]]] GetContacts(ContactManagement.Api.Models.DTOs.ContactSearchDto, System.Threading.CancellationToken) on controller ContactManagement.Api.Controllers.ContactsController (ContactManagement.Api).
+2025-08-13 10:36:57.115 +00:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM "Contacts" AS "c"
+2025-08-13 10:36:57.121 +00:00 [INF] Executed DbCommand (0ms) [Parameters=[@__p_1='?' (DbType = Int32), @__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT "c"."Id", "c"."Address", "c"."CreatedAt", "c"."Email", "c"."FirstName", "c"."LastName", "c"."PhoneNumber", "c"."UpdatedAt"
+FROM "Contacts" AS "c"
+ORDER BY "c"."FirstName" DESC
+LIMIT @__p_1 OFFSET @__p_0
+2025-08-13 10:36:57.121 +00:00 [INF] Retrieved 6 contacts (page 1/1)
+2025-08-13 10:36:57.122 +00:00 [INF] Executing OkObjectResult, writing value of type 'ContactManagement.Api.Models.DTOs.PagedResultDto`1[[ContactManagement.Api.Models.DTOs.ContactDto, ContactManagement.Api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-08-13 10:36:57.122 +00:00 [INF] Executed action ContactManagement.Api.Controllers.ContactsController.GetContacts (ContactManagement.Api) in 13.0533ms
+2025-08-13 10:36:57.122 +00:00 [INF] Executed endpoint 'ContactManagement.Api.Controllers.ContactsController.GetContacts (ContactManagement.Api)'
+2025-08-13 10:36:57.122 +00:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/contacts?pageNumber=1&pageSize=12&sortBy=firstName&sortOrder=desc - 200 null application/json; charset=utf-8 14.0273ms
+2025-08-13 10:37:01.006 +00:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/contacts?pageNumber=1&pageSize=12&sortBy=createdAt&sortOrder=desc - null null
+2025-08-13 10:37:01.007 +00:00 [INF] Executing endpoint 'ContactManagement.Api.Controllers.ContactsController.GetContacts (ContactManagement.Api)'
+2025-08-13 10:37:01.007 +00:00 [INF] Route matched with {action = "GetContacts", controller = "Contacts"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[ContactManagement.Api.Models.DTOs.PagedResultDto`1[ContactManagement.Api.Models.DTOs.ContactDto]]] GetContacts(ContactManagement.Api.Models.DTOs.ContactSearchDto, System.Threading.CancellationToken) on controller ContactManagement.Api.Controllers.ContactsController (ContactManagement.Api).
+2025-08-13 10:37:01.012 +00:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM "Contacts" AS "c"
+2025-08-13 10:37:01.015 +00:00 [INF] Executed DbCommand (0ms) [Parameters=[@__p_1='?' (DbType = Int32), @__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT "c"."Id", "c"."Address", "c"."CreatedAt", "c"."Email", "c"."FirstName", "c"."LastName", "c"."PhoneNumber", "c"."UpdatedAt"
+FROM "Contacts" AS "c"
+ORDER BY "c"."CreatedAt" DESC
+LIMIT @__p_1 OFFSET @__p_0
+2025-08-13 10:37:01.016 +00:00 [INF] Retrieved 6 contacts (page 1/1)
+2025-08-13 10:37:01.016 +00:00 [INF] Executing OkObjectResult, writing value of type 'ContactManagement.Api.Models.DTOs.PagedResultDto`1[[ContactManagement.Api.Models.DTOs.ContactDto, ContactManagement.Api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-08-13 10:37:01.016 +00:00 [INF] Executed action ContactManagement.Api.Controllers.ContactsController.GetContacts (ContactManagement.Api) in 8.933ms
+2025-08-13 10:37:01.016 +00:00 [INF] Executed endpoint 'ContactManagement.Api.Controllers.ContactsController.GetContacts (ContactManagement.Api)'
+2025-08-13 10:37:01.016 +00:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/contacts?pageNumber=1&pageSize=12&sortBy=createdAt&sortOrder=desc - 200 null application/json; charset=utf-8 10.6208ms
+2025-08-13 10:37:03.410 +00:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/contacts?pageNumber=1&pageSize=12&sortBy=createdAt&sortOrder=asc - null null
+2025-08-13 10:37:03.410 +00:00 [INF] Executing endpoint 'ContactManagement.Api.Controllers.ContactsController.GetContacts (ContactManagement.Api)'
+2025-08-13 10:37:03.411 +00:00 [INF] Route matched with {action = "GetContacts", controller = "Contacts"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[ContactManagement.Api.Models.DTOs.PagedResultDto`1[ContactManagement.Api.Models.DTOs.ContactDto]]] GetContacts(ContactManagement.Api.Models.DTOs.ContactSearchDto, System.Threading.CancellationToken) on controller ContactManagement.Api.Controllers.ContactsController (ContactManagement.Api).
+2025-08-13 10:37:03.419 +00:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM "Contacts" AS "c"
+2025-08-13 10:37:03.423 +00:00 [INF] Executed DbCommand (0ms) [Parameters=[@__p_1='?' (DbType = Int32), @__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT "c"."Id", "c"."Address", "c"."CreatedAt", "c"."Email", "c"."FirstName", "c"."LastName", "c"."PhoneNumber", "c"."UpdatedAt"
+FROM "Contacts" AS "c"
+ORDER BY "c"."CreatedAt"
+LIMIT @__p_1 OFFSET @__p_0
+2025-08-13 10:37:03.423 +00:00 [INF] Retrieved 6 contacts (page 1/1)
+2025-08-13 10:37:03.423 +00:00 [INF] Executing OkObjectResult, writing value of type 'ContactManagement.Api.Models.DTOs.PagedResultDto`1[[ContactManagement.Api.Models.DTOs.ContactDto, ContactManagement.Api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-08-13 10:37:03.423 +00:00 [INF] Executed action ContactManagement.Api.Controllers.ContactsController.GetContacts (ContactManagement.Api) in 12.3175ms
+2025-08-13 10:37:03.424 +00:00 [INF] Executed endpoint 'ContactManagement.Api.Controllers.ContactsController.GetContacts (ContactManagement.Api)'
+2025-08-13 10:37:03.424 +00:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/contacts?pageNumber=1&pageSize=12&sortBy=createdAt&sortOrder=asc - 200 null application/json; charset=utf-8 14.1389ms
+2025-08-13 11:02:13.273 +00:00 [INF] Application is shutting down...
