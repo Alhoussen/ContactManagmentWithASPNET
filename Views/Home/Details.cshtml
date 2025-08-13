@@ -1,0 +1,297 @@
+@{
+    ViewData["Title"] = "Détails du Contact";
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+                <h1 class="display-6 fw-bold text-primary">
+                    <i class="fas fa-user me-2"></i>
+                    Détails du Contact
+                </h1>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/">Accueil</a></li>
+                        <li class="breadcrumb-item active">Détails du Contact</li>
+                    </ol>
+                </nav>
+            </div>
+            <div class="d-flex gap-2">
+                <button class="btn btn-outline-primary" onclick="window.history.back()">
+                    <i class="fas fa-arrow-left me-1"></i>
+                    Retour
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Contact Details Card -->
+<div class="row" id="contactDetailsContainer">
+    <!-- Contact details will be loaded here -->
+</div>
+
+<!-- Loading State -->
+<div class="row" id="detailsLoading">
+    <div class="col-12 text-center py-5">
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Chargement...</span>
+        </div>
+        <p class="mt-3 text-muted">Chargement des détails du contact...</p>
+    </div>
+</div>
+
+<!-- Error State -->
+<div class="row" id="detailsError" style="display: none;">
+    <div class="col-12 text-center py-5">
+        <div class="alert alert-danger">
+            <i class="fas fa-exclamation-triangle fa-3x mb-3"></i>
+            <h4>Contact non trouvé</h4>
+            <p>Le contact demandé n'existe pas ou a été supprimé.</p>
+            <a href="/" class="btn btn-primary">
+                <i class="fas fa-home me-1"></i>
+                Retour à l'accueil
+            </a>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+<script>
+    const contactId = @ViewBag.ContactId;
+    
+    // Load contact details on page load
+    $(document).ready(function() {
+        loadContactDetails(contactId);
+    });
+
+    async function loadContactDetails(id) {
+        try {
+            const response = await fetch(`/api/contacts/${id}`);
+            
+            if (!response.ok) {
+                if (response.status === 404) {
+                    showErrorState();
+                    return;
+                }
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            const contact = await response.json();
+            renderContactDetails(contact);
+            
+        } catch (error) {
+            console.error('Error loading contact details:', error);
+            showErrorState();
+        } finally {
+            document.getElementById('detailsLoading').style.display = 'none';
+        }
+    }
+
+    function renderContactDetails(contact) {
+        const container = document.getElementById('contactDetailsContainer');
+        
+        const html = `
+            <div class="col-lg-6 mb-4">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <h4 class="card-title">${contact.fullName}</h4>
+                        <p class="text-muted">Contact depuis le ${new Date(contact.createdAt).toLocaleDateString('fr-FR')}</p>
+                        
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-primary" onclick="editContact(${contact.id})">
+                                <i class="fas fa-edit me-1"></i>
+                                Modifier
+                            </button>
+                            <button class="btn btn-outline-danger" onclick="deleteContact(${contact.id})">
+                                <i class="fas fa-trash me-1"></i>
+                                Supprimer
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-6 mb-4">
+                <div class="card h-100">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">
+                            <i class="fas fa-info-circle me-2"></i>
+                            Informations de Contact
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="contact-info-item">
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <strong><i class="fas fa-envelope me-2 text-primary"></i>Email</strong>
+                                </div>
+                                <div class="col-sm-9">
+                                    <a href="mailto:${contact.email}" class="text-decoration-none">${contact.email}</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        ${contact.phoneNumber ? `
+                        <div class="contact-info-item">
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <strong><i class="fas fa-phone me-2 text-success"></i>Téléphone</strong>
+                                </div>
+                                <div class="col-sm-9">
+                                    <a href="tel:${contact.phoneNumber}" class="text-decoration-none">${contact.phoneNumber}</a>
+                                </div>
+                            </div>
+                        </div>
+                        ` : ''}
+                        
+                        ${contact.address ? `
+                        <div class="contact-info-item">
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <strong><i class="fas fa-map-marker-alt me-2 text-info"></i>Adresse</strong>
+                                </div>
+                                <div class="col-sm-9">${contact.address}</div>
+                            </div>
+                        </div>
+                        ` : ''}
+                        
+                        <div class="contact-info-item">
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <strong><i class="fas fa-calendar-plus me-2 text-warning"></i>Créé le</strong>
+                                </div>
+                                <div class="col-sm-9">${new Date(contact.createdAt).toLocaleString('fr-FR')}</div>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-info-item">
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <strong><i class="fas fa-edit me-2 text-secondary"></i>Modifié le</strong>
+                                </div>
+                                <div class="col-sm-9">${new Date(contact.updatedAt).toLocaleString('fr-FR')}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">
+                            <i class="fas fa-cog me-2"></i>
+                            Actions Rapides
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row g-3">
+                            <div class="col-md-3">
+                                <button class="btn btn-outline-primary w-100" onclick="sendEmail('${contact.email}')">
+                                    <i class="fas fa-envelope me-2"></i>
+                                    Envoyer un Email
+                                </button>
+                            </div>
+                            ${contact.phoneNumber ? `
+                            <div class="col-md-3">
+                                <button class="btn btn-outline-success w-100" onclick="makeCall('${contact.phoneNumber}')">
+                                    <i class="fas fa-phone me-2"></i>
+                                    Appeler
+                                </button>
+                            </div>
+                            ` : ''}
+                            <div class="col-md-3">
+                                <button class="btn btn-outline-info w-100" onclick="exportContact(${contact.id})">
+                                    <i class="fas fa-download me-2"></i>
+                                    Exporter
+                                </button>
+                            </div>
+                            <div class="col-md-3">
+                                <button class="btn btn-outline-secondary w-100" onclick="shareContact(${contact.id})">
+                                    <i class="fas fa-share me-2"></i>
+                                    Partager
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        container.innerHTML = html;
+        container.style.display = 'block';
+        
+        // Update page title
+        document.title = `${contact.fullName} - Gestion des Contacts`;
+    }
+
+    function showErrorState() {
+        document.getElementById('detailsError').style.display = 'block';
+        document.getElementById('contactDetailsContainer').style.display = 'none';
+    }
+
+    function editContact(id) {
+        // Redirect to main page with edit modal
+        window.location.href = `/?edit=${id}`;
+    }
+
+    async function deleteContact(id) {
+        if (!confirm('Êtes-vous sûr de vouloir supprimer ce contact ?')) {
+            return;
+        }
+
+        try {
+            showLoading();
+            
+            const response = await fetch(`/api/contacts/${id}`, {
+                method: 'DELETE'
+            });
+
+            if (response.ok) {
+                showToast('Contact supprimé avec succès', 'success');
+                setTimeout(() => {
+                    window.location.href = '/';
+                }, 1000);
+            } else {
+                throw new Error('Erreur lors de la suppression');
+            }
+        } catch (error) {
+            console.error('Error deleting contact:', error);
+            showToast('Erreur lors de la suppression du contact', 'danger');
+        } finally {
+            hideLoading();
+        }
+    }
+
+    function sendEmail(email) {
+        window.location.href = `mailto:${email}`;
+    }
+
+    function makeCall(phone) {
+        window.location.href = `tel:${phone}`;
+    }
+
+    function exportContact(id) {
+        // Implementation for exporting contact
+        showToast('Fonctionnalité d\'export en cours de développement', 'info');
+    }
+
+    function shareContact(id) {
+        if (navigator.share) {
+            navigator.share({
+                title: 'Contact',
+                text: 'Partager ce contact',
+                url: window.location.href
+            });
+        } else {
+            // Fallback: copy URL to clipboard
+            navigator.clipboard.writeText(window.location.href).then(() => {
+                showToast('Lien copié dans le presse-papiers', 'success');
+            });
+        }
+    }
+</script>
+}
+
