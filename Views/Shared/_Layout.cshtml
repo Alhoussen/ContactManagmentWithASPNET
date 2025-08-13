@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Gestion des Contacts</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --success-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            --card-shadow-hover: 0 20px 40px rgba(0, 0, 0, 0.15);
+            --border-radius: 16px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+
+        [data-bs-theme="dark"] body {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+        }
+
+        .navbar {
+            backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.95) !important;
+            border: none;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        [data-bs-theme="dark"] .navbar {
+            background: rgba(26, 26, 46, 0.95) !important;
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.8rem;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .modern-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: var(--border-radius);
+            box-shadow: var(--card-shadow);
+            transition: var(--transition);
+            overflow: hidden;
+        }
+
+        .modern-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--card-shadow-hover);
+        }
+
+        [data-bs-theme="dark"] .modern-card {
+            background: rgba(45, 45, 77, 0.95);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .contact-card {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--primary-gradient);
+        }
+
+        /* Layout horizontal pour les cartes sur desktop */
+        .contact-card-horizontal {
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            margin-bottom: 15px;
+        }
+
+        .contact-card-horizontal .contact-avatar {
+            width: 60px;
+            height: 60px;
+            font-size: 20px;
+            margin-right: 20px;
+            flex-shrink: 0;
+        }
+
+        .contact-card-horizontal .contact-info {
+            flex: 1;
+            margin-left: 0;
+            margin-right: 20px;
+        }
+
+        .contact-card-horizontal .contact-details {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+            flex: 2;
+            margin-right: 20px;
+        }
+
+        .contact-card-horizontal .contact-details > div {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0 !important;
+        }
+
+        .contact-card-horizontal .contact-actions {
+            flex-shrink: 0;
+        }
+
+        .stats-card {
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stats-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+
+        .stats-card:hover::before {
+            transform: scale(1.5);
+        }
+
+        .search-container {
+            position: relative;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .search-input {
+            padding: 15px 20px 15px 20px;
+            border-radius: 50px;
+            border: 2px solid #e9ecef;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            transition: var(--transition);
+            font-size: 16px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .search-input:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1), 0 4px 20px rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 1);
+            outline: none;
+        }
+
+        .search-input::placeholder {
+            color: #6c757d;
+            font-weight: 400;
+        }
+
+        .search-icon {
+            display: none; /* Hide the icon since we use emoji in placeholder */
+        }
+
+        .btn-modern {
+            padding: 12px 24px;
+            border-radius: 50px;
+            border: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-modern-primary {
+            background: var(--primary-gradient);
+            color: white;
+        }
+
+        .btn-modern-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-floating {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--secondary-gradient);
+            color: white;
+            border: none;
+            font-size: 24px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            transition: var(--transition);
+            z-index: 1000;
+        }
+
+        .btn-floating:hover {
+            transform: scale(1.1);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal-content {
+            border: none;
+            border-radius: var(--border-radius);
+            backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.95);
+        }
+
+        [data-bs-theme="dark"] .modal-content {
+            background: rgba(45, 45, 77, 0.95);
+        }
+
+        .form-control {
+            border-radius: 12px;
+            border: 2px solid #e9ecef;
+            padding: 12px 16px;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .fade-in {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        @@keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .loading-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @@keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #6c757d;
+        }
+
+        .empty-state i {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            opacity: 0.5;
+        }
+
+        .contact-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--primary-gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 18px;
+        }
+
+        .contact-info {
+            flex: 1;
+            margin-left: 15px;
+        }
+
+        .contact-name {
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 4px;
+        }
+
+        .contact-email {
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+
+        .contact-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .btn-icon:hover {
+            transform: scale(1.1);
+        }
+
+        .toast {
+            border: none;
+            border-radius: var(--border-radius);
+            backdrop-filter: blur(20px);
+        }
+
+        @@media (max-width: 768px) {
+            .btn-floating {
+                bottom: 20px;
+                right: 20px;
+                width: 56px;
+                height: 56px;
+                font-size: 20px;
+            }
+            
+            .search-container {
+                margin: 0 15px;
+            }
+        }
+    </style>
+
+        .theme-toggle {
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        .empty-state i {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top shadow">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <i class="fas fa-address-book me-2"></i>
+                Gestion des Contacts
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">
+                            <i class="fas fa-home me-1"></i>
+                            Accueil
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/swagger" target="_blank">
+                            <i class="fas fa-code me-1"></i>
+                            API
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="d-flex align-items-center">
+                    <!-- Theme Toggle -->
+                    <button class="btn btn-outline-light me-2 theme-toggle" id="themeToggle" title="Changer le thème">
+                        <i class="fas fa-moon" id="themeIcon"></i>
+                    </button>
+
+                    <!-- Search -->
+                    <div class="search-container me-2">
+                        <input type="text" class="form-control search-input" id="globalSearch" 
+                               placeholder="Rechercher un contact..." style="width: 250px;">
+                        <i class="fas fa-search search-icon"></i>
+                    </div>
+
+                    <!-- Add Contact Button -->
+                    <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#contactModal" 
+                            onclick="openContactModal()">
+                        <i class="fas fa-plus me-1"></i>
+                        Nouveau Contact
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main style="padding-top: 80px; min-height: calc(100vh - 80px);">
+        <div class="container py-4">
+            @RenderBody()
+        </div>
+    </main>
+
+    <!-- Loading Spinner -->
+    <div class="loading-spinner position-fixed top-50 start-50 translate-middle" id="loadingSpinner">
+        <div class="spinner-border text-primary" role="status" style="width: 3rem; height: 3rem;">
+            <span class="visually-hidden">Chargement...</span>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div class="toast-container position-fixed bottom-0 end-0 p-3" id="toastContainer">
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    
+    <script>
+        // Theme Management
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        
+        // Load saved theme
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-bs-theme', savedTheme);
+        updateThemeIcon(savedTheme);
+
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-bs-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            document.documentElement.setAttribute('data-bs-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeIcon(newTheme);
+        });
+
+        function updateThemeIcon(theme) {
+            themeIcon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+        }
+
+        // Loading Spinner
+        function showLoading() {
+            document.getElementById('loadingSpinner').style.display = 'block';
+        }
+
+        function hideLoading() {
+            document.getElementById('loadingSpinner').style.display = 'none';
+        }
+
+        // Toast Notifications
+        function showToast(message, type = 'success') {
+            const toastContainer = document.getElementById('toastContainer');
+            const toastId = 'toast_' + Date.now();
+            
+            const toastHtml = `
+                <div class="toast align-items-center text-bg-${type} border-0" role="alert" id="${toastId}">
+                    <div class="d-flex">
+                        <div class="toast-body">
+                            <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'danger' ? 'exclamation-circle' : 'info-circle'} me-2"></i>
+                            ${message}
+                        </div>
+                        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+                    </div>
+                </div>
+            `;
+            
+            toastContainer.insertAdjacentHTML('beforeend', toastHtml);
+            
+            const toastElement = document.getElementById(toastId);
+            const toast = new bootstrap.Toast(toastElement);
+            toast.show();
+            
+            // Remove toast element after it's hidden
+            toastElement.addEventListener('hidden.bs.toast', () => {
+                toastElement.remove();
+            });
+        }
+
+        // Global error handler
+        window.addEventListener('unhandledrejection', (event) => {
+            console.error('Unhandled promise rejection:', event.reason);
+            showToast('Une erreur inattendue s\'est produite', 'danger');
+        });
+    </script>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
+
